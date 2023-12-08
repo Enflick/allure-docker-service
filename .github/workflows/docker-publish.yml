@@ -22,7 +22,7 @@ permissions:
 
 jobs:
   build_release:
-    runs-on: ubuntu-latest
+    runs-on: textnow
     if: github.event_name == 'push'
     outputs:
       build_version: ${{ steps.prepare.outputs.build_version }}
@@ -30,15 +30,17 @@ jobs:
       - name: Pulling code
         uses: actions/checkout@v2
 
-      - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v2
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: us-east-1
-          role-to-assume: ${{ secrets.IAM_ROLE }}
-
+          role-to-assume: arn:aws:iam::695141026374:role/gha-runners-role
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Install curl
+        run: sudo apt-get update && sudo apt-get install -y curl
 
       - name: Preparing
         id: prepare
