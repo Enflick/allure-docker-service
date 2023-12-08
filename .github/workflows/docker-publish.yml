@@ -29,10 +29,15 @@ jobs:
     steps:
       - name: Pulling code
         uses: actions/checkout@v2
-
+        
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          role-to-assume: arn:aws:iam::695141026374:role/gha-runners-role
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: Enflick/composite-actions/actions/aws/login-to-ecr@v0.0.49
+        uses: aws-actions/amazon-ecr-login@v2
 
       - name: Preparing
         id: prepare
