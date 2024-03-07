@@ -3,7 +3,7 @@ PROJECT_ID=$1
 
 ENDPOINT="http://localhost:$PORT/allure-docker-service/emailable-report/render?project_id=$PROJECT_ID"
 RETRY=7
-DELAY=2
+DELAY=10
 COOKIES_TEMP_FILE=""
 AUTH=0
 
