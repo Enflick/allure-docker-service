@@ -28,16 +28,16 @@ jobs:
       build_version: ${{ steps.prepare.outputs.build_version }}
     steps:
       - name: Pulling code
-        uses: actions/checkout@v2
+        uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4
         with:
           aws-region: us-east-1
           role-to-assume: arn:aws:iam::695141026374:role/gha-runners-role
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v2
+        uses: aws-actions/amazon-ecr-login@d539f0932e70871a027e9d5a9d8fc38589180a64 # v2
 
       - name: Install curl
         run: sudo apt-get update && sudo apt-get install -y curl
